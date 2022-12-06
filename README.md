@@ -59,4 +59,4 @@ Start time:
 
 Finish time:
 
-Actual time needed to complete:
+Actual time needed to complete: 8
