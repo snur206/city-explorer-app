@@ -53,10 +53,12 @@ Actual time needed to complete: 1 hour 10 minutes
 
 Name of feature: 4. Errors
 
-Estimate of time needed to complete:
+Estimate of time needed to complete: 1 hour
 
-Start time:
+Start time: 7:40
 
-Finish time:
+Finish time: 10:00
 
-Actual time needed to complete: 8
+Actual time needed to complete: 2 hours 20 miuntes
+
+![WRRC](src/images/wrrc1.png)
