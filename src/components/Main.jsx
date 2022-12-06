@@ -24,9 +24,10 @@ class Main extends React.Component {
     e.preventDefault();
     let request = {
       method: 'GET',
-      url: `https://us1.locationiq.com/v1/search?key=${process.env.REACT_APP_KEY}&q=${this.state.city}&format=json`
+      url: `https://us1.locationiq.com/v1/search?key=${ACCESS_KEY}&q=${this.state.city}&format=json`
     }
     try {
+      console.log('making request')
       let response = await axios(request);
       console.log(response.data[0])
       this.setState({
@@ -34,6 +35,7 @@ class Main extends React.Component {
       });
 
     } catch (err) {
+      console.log(err, 'here is the catch statement')
 
       // eslint-disable-next-line no-unused-expressions
       
