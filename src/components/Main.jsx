@@ -8,13 +8,15 @@ class Main extends React.Component{
   constructor(props){
     super(props);
     this.state={
+      errorMessage: false,
       locationData: [],
       city: '',
     }
   }
 cityEntree = (e) => {
   this.setState({
-    city: e.target.value
+    city: e.target.value,
+    isError: false
   })
 }
   handleLocationSearch = async (e) => {
@@ -27,7 +29,11 @@ cityEntree = (e) => {
     console.log(response.data[0])
     this.setState({
       locationData: response.data[0],
-    });
+    }); 
+    // eslint-disable-next-line no-unused-expressions
+    error => {
+      this.setState({ errorMessage: error.message, })
+    }
   }
       render() {
           return(
