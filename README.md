@@ -51,7 +51,7 @@ Finish time: 7:40
 
 Actual time needed to complete: 1 hour 10 minutes
 
-Name of feature: 4. Errors
+Name of feature: 4.Errors
 
 Estimate of time needed to complete: 1 hour
 

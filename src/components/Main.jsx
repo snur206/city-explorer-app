@@ -58,7 +58,7 @@ class Main extends React.Component {
 
           ? <Alert>
               {JSON.stringify(this.state.error)}
-              <Button onClick={this.handleError}>Ok go away</Button>
+              <Button onClick={this.handleError}>Ok go away!</Button>
             </Alert>
           : null
         }
