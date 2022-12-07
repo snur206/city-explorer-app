@@ -3,6 +3,7 @@ import axios from "axios";
 import Form from 'react-bootstrap/Form';
 import Button from "react-bootstrap/Button";
 import Alert from "react-bootstrap/Alert";
+import Weather from "./Weather";
 let ACCESS_KEY = process.env.REACT_APP_KEY
 
 class Main extends React.Component {
@@ -78,7 +79,7 @@ class Main extends React.Component {
             </Alert>
           : null
         }
-
+        <Weather weather = {this.state.weather}/>  
         <p>{this.state.locationData.display_name}</p>
         <li>{this.state.locationData.lat}</li>
         <li>{this.state.locationData.lon}</li>
