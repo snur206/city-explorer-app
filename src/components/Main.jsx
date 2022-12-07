@@ -12,6 +12,7 @@ class Main extends React.Component {
       errorMessage: false,
       locationData: [],
       city: '',
+      error: null,
     }
   }
   cityEntree = (e) => {
@@ -32,8 +33,9 @@ class Main extends React.Component {
       console.log(response.data[0])
       this.setState({
         locationData: response.data[0],
-      });
-
+        latitude: response.data[0].lat,
+        longitude: response.data[0].lon
+      }, () => this.weatherData(response.data[0].lat, response.data[0].lon));
     } catch (err) {
       console.log(err, 'here is the catch statement')
 
@@ -41,6 +43,17 @@ class Main extends React.Component {
       
         this.setState({ error: err.response.data })
       
+    }
+  }
+
+  weatherData = async (lat, lon) => {
+    try {
+      let weather = await axios.get(`http://localhost:3001/weather?searchQuery=${this.state.location}&lat=${lat}&lon=${lon}`);
+      this.sethState({
+        weather: weather.data
+      });
+    } catch(err) {
+      console.log('err', err);
     }
   }
 
