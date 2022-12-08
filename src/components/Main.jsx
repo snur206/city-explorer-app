@@ -14,6 +14,7 @@ class Main extends React.Component {
       locationData: [],
       city: '',
       error: null,
+      weather: []
     }
   }
   cityEntree = (e) => {
@@ -79,7 +80,7 @@ class Main extends React.Component {
             </Alert>
           : null
         }
-        <Weather weather = {this.state.weather}/>  
+       {this.state.weather.length?<Weather weather = {this.state.weather}/>: null}  
         <p>{this.state.locationData.display_name}</p>
         <li>{this.state.locationData.lat}</li>
         <li>{this.state.locationData.lon}</li>
