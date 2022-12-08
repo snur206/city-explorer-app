@@ -5,6 +5,7 @@ import Button from "react-bootstrap/Button";
 import Alert from "react-bootstrap/Alert";
 import Weather from "./Weather";
 let ACCESS_KEY = process.env.REACT_APP_KEY
+import Movie from "./Movie";
 
 class Main extends React.Component {
   constructor(props) {
@@ -14,7 +15,8 @@ class Main extends React.Component {
       locationData: [],
       city: '',
       error: null,
-      weather: []
+      weather: [],
+      movie: []
     }
   }
   cityEntree = (e) => {
@@ -56,8 +58,17 @@ class Main extends React.Component {
         weather: weather.data
       });
     } catch(err) {
-      console.log('err', err);
+      console.log('error', err);
     }
+  }
+  movieData = async () => {
+    try {
+      let movie = await axios.get(`${process.env.REACT_APP_SERVER}/movie?searchQuery=${this.state.city}`);
+      this.setState({
+        movie: 
+      })
+    }
+
   }
 
   handleError = () => {
@@ -85,6 +96,8 @@ class Main extends React.Component {
         <li>{this.state.locationData.lat}</li>
         <li>{this.state.locationData.lon}</li>
         <img src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_KEY}&center=${this.state.locationData.lat},${this.state.locationData.lon}`} alt={this.state.locationData.display_name} />
+
+        <Movie movie= {this.state.movie} />
 
       </>
     )
