@@ -61,6 +61,38 @@ Finish time: 10:00
 
 Actual time needed to complete: 2 hours 20 miuntes
 
-![WRRC](src/images/wrrc1.png)
+![WRRC for lab 7](src/images/wrrc1.png)
 
+# Lab 8
 
+![WRRC for lab 8](src/images/wrrc3.png)
+
+Name of feature: 1. Weather (live)
+
+Estimate of time needed to complete: 1 hour
+
+Start time: 5:20
+
+Finish time: 
+
+Actual time needed to complete: 
+
+Name of feature: 2. Movies
+
+Estimate of time needed to complete: 
+
+Start time: 
+
+Finish time: 
+
+Actual time needed to complete: 
+
+Name of feature: 3. Publish
+
+Estimate of time needed to complete: 
+
+Start time: 
+
+Finish time: 
+
+Actual time needed to complete: 
