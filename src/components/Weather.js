@@ -1,15 +1,16 @@
 import React from "react";
-import Card from 'react-bootstrap/Card';
+import Forcast from "./Forcast";
 
 class Weather extends React.Component {
   render() {
-    console.log(this.props.weather);
 
-
-    let weather = this.props.weather.map((day, idx) => (
-      <Card>
-      <Card.Body>{day.city}{day.description}{day.date}</Card.Body>
-    </Card>
+    let weather = this.props.weatherData.map((day, idx) => (
+      <Forcast
+        description={day.description}
+        key={idx}
+        city={this.props.city}
+        date={day.date}
+      />
     ))
     return (
       [weather]

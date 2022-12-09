@@ -20,16 +20,24 @@ class Main extends React.Component {
     }
   }
   cityEntree = (e) => {
-    this.setState({
-      city: e.target.value,
-      isError: false
+    e.preventDefault();
+    try {
+      this.handleLocationSearch();
+      this.weatherData();
+      this.movieData();
+      this.setState ({
+        flag: true,
+      })
+    } catch (err) {
+      this.setState({
+        city: e.target.value,
+        isError: false
+    }
     })
   }
   handleLocationSearch = async (e) => {
-    e.preventDefault();
-    let request = {
-      method: 'GET',
-      url: `https://us1.locationiq.com/v1/search?key=${ACCESS_KEY}&q=${this.state.city}&format=json`
+    let cityData = await axios.get(`https://us1.locationiq.com/v1/search?key=${ACCESS_KEY}&q=${this.state.city}&format=json`);
+
     }
     try {
       console.log('making request')
@@ -50,26 +58,25 @@ class Main extends React.Component {
     }
   }
 
-  weatherData = async (lat, lon) => {
-    try {
-      let weather = await axios.get(`${process.env.REACT_APP_SERVER}/weather?searchQuery=${this.state.city}&lat=${lat}&lon=${lon}`);
+  weatherData = async (e) => {
+    let weather = await axios.get(`${process.env.REACT_APP_SERVER}/weather?searchQuery=${this.state.city}&lat=${lat}&lon=${lon}`);
+    let weatherInfo = weather.data; 
       console.log(weather.data);
       this.setState({
-        weather: weather.data
+        weather: weatherInfo
       });
-    } catch(err) {
-      console.log('error', err);
-    }
+    } 
   }
-  movieData = async () => {
-    try {
-      let movie = await axios.get(`${process.env.REACT_APP_SERVER}/movie?searchQuery=${this.state.city}`);
-      this.setState({
-        movie: 
+  movieData = async (e) => {
+    let movie = await axios.get(`${process.env.REACT_APP_SERVER}/movie?searchQuery=${this.state.city}`);
+    let cityMovie = await axios.get(url);
+    let movieData = cityMovie.data;
+    this.setState({
+        movie: movieData
       })
-    }
+    } 
 
-  }
+  
 
   handleError = () => {
     this.setState({ error: null });
@@ -102,7 +109,7 @@ class Main extends React.Component {
       </>
     )
   }
-}
+// }
 
 
 export default Main;
