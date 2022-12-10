@@ -79,6 +79,7 @@ class Main extends React.Component {
     this.setState({ error: null });
   }
   render() {
+    console.log(this.state.city);
     return (
 
       <>
@@ -95,7 +96,7 @@ class Main extends React.Component {
             </Alert>
           : null
         }
-       {this.state.weather.length > 1 ? <Weather weather = {this.state.weather}/>: null}  
+       {this.state.weather.length > 1 ? <Weather weather = {this.state.weather} city = {this.state.city}/>: null}  
         <p>{this.state.city}</p>
         <li>{this.state.latitude}</li>
         <li>{this.state.longitude}</li>

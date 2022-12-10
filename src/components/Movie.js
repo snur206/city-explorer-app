@@ -7,7 +7,7 @@ class Movies extends React.Component {
     // console.log(this.props.movie);
     return (
       <>
-      <p>Movie:</p>
+      <p>Movie</p>
       {this.props.movie.map(data => {
         return (
             <Card style={{ width: '18rem' }}>
@@ -17,7 +17,7 @@ class Movies extends React.Component {
                 <h5>Released on: {data.released_on}</h5>
                 <h5>Average votes: {data.average_votes}</h5>
                 <h5>Total votes: {data.total_votes}</h5>
-                <h5>Image: {data.image_url}</h5>
+                <h5>Image: </h5><img src= {data.image_url} />
                 <h5>Popularity: {data.popularity}</h5>
               </ListGroup>
             </Card>

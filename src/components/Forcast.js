@@ -7,13 +7,15 @@ import { Container, Card, } from 'react-bootstrap'
 class Forcast extends React.Component {
 
   render() {
+    console.log(this.props.city)
+    console.log(this.props.date);
     return (
 
       <Container>
         <Card className='forcast'>
           <Card.Body>
-            <Card.Title>Weather at: {this.props.city} on: {this.props.date}</Card.Title>
-            <Card.Text>{this.props.description}</Card.Text>
+            <Card.Title>Weather in: {this.props.city} on: {this.props.day.time}</Card.Title>
+            <Card.Text>{this.props.day.forecast}</Card.Text>
           </Card.Body>
         </Card>
       </Container>
