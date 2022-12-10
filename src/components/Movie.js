@@ -1,35 +1,30 @@
 import React from "react";
-import { Card } from "react-bootstrap";
+import Card from "react-bootstrap/Card";
+import ListGroup from "react-bootstrap/ListGroup";
 
 class Movies extends React.Component {
   render() {
-    return(
+    // console.log(this.props.movie);
+    return (
       <>
-      {
-        this.props.movie.map((movie,idx) => (
-          <Card key={idx}>
-            <Card.Body>
-              <Card.Title>Movie Title: {movie.title}</Card.Title>
-              <Card.Text>
-              Overview: {movie.overview}
-              </Card.Text>
-              <Card.Text>
-              Average votes: {movie.average_votes}
-              </Card.Text>
-              <Card.Text>
-              Total votes: {movie.total_votes}
-              </Card.Text>
-              <Card.Text>
-              Popularity: {movie.popularity}
-              </Card.Text>
-              <Card.Text>
-                Released on: {movie.released_on}
-              </Card.Text>
-            </Card.Body>
-          </Card>
-        ))}
-      </>
-    );
+      <p>Movie:</p>
+      {this.props.movie.map(data => {
+        return (
+            <Card style={{ width: '18rem' }}>
+              <ListGroup variant='flush'>
+                <ListGroup.Item><h4>Movie Options: {data.title}</h4></ListGroup.Item>
+                <h5>Overview: {data.overview}</h5>
+                <h5>Released on: {data.released_on}</h5>
+                <h5>Average votes: {data.average_votes}</h5>
+                <h5>Total votes: {data.total_votes}</h5>
+                <h5>Image: {data.image_url}</h5>
+                <h5>Popularity: {data.popularity}</h5>
+              </ListGroup>
+            </Card>
+          )
+        })}
+        </>
+    )
   }
 }
 export default Movies;
