@@ -4,8 +4,8 @@ import Form from 'react-bootstrap/Form';
 import Button from "react-bootstrap/Button";
 import Alert from "react-bootstrap/Alert";
 import Weather from "./Weather";
-let ACCESS_KEY = process.env.REACT_APP_KEY
 import Movie from "./Movie";
+let ACCESS_KEY = process.env.REACT_APP_KEY
 
 class Main extends React.Component {
   constructor(props) {
@@ -16,38 +16,33 @@ class Main extends React.Component {
       city: '',
       error: null,
       weather: [],
-      movie: []
+      movie: [],
+      latitude: '',
+      longitude: ''
     }
   }
   cityEntree = (e) => {
     e.preventDefault();
-    try {
-      this.handleLocationSearch();
-      this.weatherData();
-      this.movieData();
-      this.setState ({
-        flag: true,
-      })
-    } catch (err) {
+    
       this.setState({
         city: e.target.value,
-        isError: false
+        
+      });
     }
-    })
-  }
-  handleLocationSearch = async (e) => {
-    let cityData = await axios.get(`https://us1.locationiq.com/v1/search?key=${ACCESS_KEY}&q=${this.state.city}&format=json`);
 
-    }
+  
+  handleLocationSearch = async (e) => {
+    e.preventDefault();
     try {
       console.log('making request')
-      let response = await axios(request);
+      // let response = await axios(request);
+      let response = await axios.get(`https://us1.locationiq.com/v1/search?key=${ACCESS_KEY}&q=${this.state.city}&format=json`);
       console.log(response.data[0])
       this.setState({
         locationData: response.data[0],
         latitude: response.data[0].lat,
         longitude: response.data[0].lon
-      }, () => this.weatherData(response.data[0].lat, response.data[0].lon));
+      }, () => this.weatherData(response.data[0].lat, response.data[0].lon), this.movieData());
     } catch (err) {
       console.log(err, 'here is the catch statement')
 
@@ -58,21 +53,23 @@ class Main extends React.Component {
     }
   }
 
-  weatherData = async (e) => {
-    let weather = await axios.get(`${process.env.REACT_APP_SERVER}/weather?searchQuery=${this.state.city}&lat=${lat}&lon=${lon}`);
-    let weatherInfo = weather.data; 
-      console.log(weather.data);
+  weatherData = async (lat, lon) => {
+    console.log('inside weather function');
+    let weather = await axios.get(`${process.env.REACT_APP_SERVER}/weather?lat=${lat}&lon=${lon}`);
+      console.log(weather);
       this.setState({
-        weather: weatherInfo
+        weather: weather.data.data
       });
     } 
-  }
+  
   movieData = async (e) => {
-    let movie = await axios.get(`${process.env.REACT_APP_SERVER}/movie?searchQuery=${this.state.city}`);
-    let cityMovie = await axios.get(url);
+    let cityMovie = await axios.get(`${process.env.REACT_APP_SERVER}/movies?movieQuery=${this.state.city}`);
+    console.log('here inside movie');
+   
     let movieData = cityMovie.data;
+    // console.log(movieData);
     this.setState({
-        movie: movieData
+        movie: movieData.data
       })
     } 
 
@@ -98,18 +95,22 @@ class Main extends React.Component {
             </Alert>
           : null
         }
-       {this.state.weather.length?<Weather weather = {this.state.weather}/>: null}  
-        <p>{this.state.locationData.display_name}</p>
-        <li>{this.state.locationData.lat}</li>
-        <li>{this.state.locationData.lon}</li>
-        <img src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_KEY}&center=${this.state.locationData.lat},${this.state.locationData.lon}`} alt={this.state.locationData.display_name} />
+       {this.state.weather.length > 1 ? <Weather weather = {this.state.weather}/>: null}  
+        <p>{this.state.city}</p>
+        <li>{this.state.latitude}</li>
+        <li>{this.state.longitude}</li>
+        {this.state.latitude && 
+        <img src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_KEY}&center=${this.state.latitude},${this.state.longitude}`} alt={this.state.locationData.display_name} />
+        } 
 
-        <Movie movie= {this.state.movie} />
+        
+      {this.state.movie.length > 1 && <Movie movie={this.state.movie} />
+      }
 
       </>
     )
   }
-// }
+}
 
 
 export default Main;
