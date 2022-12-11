@@ -2,8 +2,6 @@ import React from 'react'
 import { Container, Card, } from 'react-bootstrap'
 // import './Forcast.css';
 
-
-
 class Forcast extends React.Component {
 
   render() {
